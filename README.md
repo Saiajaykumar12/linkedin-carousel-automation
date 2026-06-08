@@ -1,4 +1,11 @@
-Built this to solve a real problem at Ecowoodies: content creation was taking 2 hours per carousel. After deploying this pipeline, the marketing team's production time dropped to under 5 minutes per post — a 96% reduction. Zero manual steps remain in the workflow.
+## Result
+
+Built and deployed at Ecowoodies. Reduced the marketing team's LinkedIn content production from **2 hours to 5 minutes per carousel** — a 96% reduction. Zero manual steps remain after the workflow runs: GPT-4o writes the content, PDF.co builds the slides, LinkedIn API posts it.
+
+Previously: writer drafts content → designer builds slides → someone schedules the post → 2 hours minimum.
+Now: add topic to Google Sheets → workflow runs automatically → posted in 5 minutes.
+
+---
 
 # LinkedIn Carousel Automation
 
