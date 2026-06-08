@@ -1,3 +1,5 @@
+Built this to solve a real problem at Ecowoodies: content creation was taking 2 hours per carousel. After deploying this pipeline, the marketing team's production time dropped to under 5 minutes per post — a 96% reduction. Zero manual steps remain in the workflow.
+
 # LinkedIn Carousel Automation
 
 Auto-generates and posts LinkedIn carousel PDFs using Make.com
