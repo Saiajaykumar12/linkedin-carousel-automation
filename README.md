@@ -7,27 +7,67 @@ Now: add topic to Google Sheets → workflow runs automatically → posted in 5 
 
 ---
 
-# LinkedIn Carousel Automation
+# LinkedIn Carousel Automation — Make.com + GPT-4o
 
-Auto-generates and posts LinkedIn carousel PDFs using Make.com
 
-## How It Works
-1. Reads a topic from Google Sheets (status = Pending)
-2. GPT-4o mini generates 8-slide carousel content as JSON
-3. GPT-4o mini generates a LinkedIn caption
-4. HTML is built from the slides and converted to PDF via PDF.co
-5. PDF is uploaded and posted to LinkedIn
-6. Row is marked as "done" in Google Sheets
+Paste a topic into Google Sheets → get a fully designed carousel PDF
+auto-posted to LinkedIn. Zero manual design, zero manual posting.
 
+## The Problem It Solves
+
+Creating LinkedIn carousel content manually means writing slides,
+designing PDFs, and posting — easily 2–3 hours per post.
+This workflow reduces that to entering one topic in a spreadsheet.
+
+## Pipeline Architecture
+Google Sheets (topic added, status = Pending)
+↓
+GPT-4o mini — generates 8-slide carousel content as structured JSON
+↓
+GPT-4o mini — generates LinkedIn caption for the post
+↓
+HTML template built from slide JSON
+↓
+PDF.co — converts HTML to styled PDF carousel
+↓
+LinkedIn API — uploads PDF and publishes post
+↓
+Google Sheets — row marked as "done"
 ## Tools Used
-- Make.com
-- Google Sheets
-- OpenAI GPT-4o mini
-- PDF.co
-- LinkedIn API
 
-## Setup
-1. Import `scenario.json` into Make.com
-2. Add your own API keys and tokens
-3. Set up your Google Sheet with columns: Topic (A), Status (B)
-4. Run the scenario
+| Tool | Role |
+|------|------|
+| Make.com | Workflow orchestration |
+| Google Sheets | Content queue and status tracker |
+| OpenAI GPT-4o mini | Slide content + caption generation |
+| PDF.co | HTML to PDF conversion |
+| LinkedIn API | Automated post publishing |
+
+## How to Use
+
+1. Import `Carousel Posting in Linkedin.json` into Make.com
+2. Connect your accounts: Google Sheets, OpenAI, PDF.co, LinkedIn
+3. Set up your Google Sheet with columns: `Topic` (A), `Status` (B)
+4. Set status of any row to `Pending`
+5. Run the scenario — carousel appears on LinkedIn within minutes
+
+## Key Design Decisions
+
+- **GPT-4o mini over GPT-4o** — carousel content doesn't need frontier
+  reasoning; mini is 10x cheaper with comparable output for structured JSON
+- **HTML → PDF over direct image generation** — gives consistent,
+  controllable slide layout without needing a design tool or API
+- **Status column in Sheets** — prevents re-processing rows already published;
+  simple but critical for idempotency
+
+## Credentials Required
+
+- OpenAI API key
+- PDF.co API key
+- LinkedIn OAuth token (via Make.com connection)
+- Google Sheets OAuth (via Make.com connection)
+
+## .env / Secrets
+
+All credentials are stored inside Make.com's connection manager —
+no secrets are committed to this repo.
